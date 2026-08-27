@@ -5,9 +5,9 @@ Server-side Fabric mod. Detects players standing on top of the Nether
 bed/respawn-anchor spawn point - or the world spawn if they don't have
 one - with a warning message.
 
-Current build: **A0.1.0** (alpha), MC **26.2** only. Not yet on GitHub -
-build from source with `./gradlew build` inside `26.2/`; the jar lands in
-`26.2/build/libs/`.
+Current build: **A0.1.0** (alpha), MC **26.2** only. Grab a built jar from
+the [Releases](../../releases) page, or build from source with
+`./gradlew build` inside `26.2/`.
 
 ## Install
 
@@ -55,5 +55,4 @@ requests and iterative testing feedback from the project owner.
 
 ## License
 
-Not yet finalized - GitHub setup (including a LICENSE file) is on hold
-until testing is complete.
+MIT - see [LICENSE](LICENSE).
