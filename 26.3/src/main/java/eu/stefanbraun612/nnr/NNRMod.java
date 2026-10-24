@@ -12,16 +12,22 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import java.util.List;
+import java.util.Locale;
 
 public class NNRMod implements ModInitializer {
 	public static final String MOD_ID = "nnr";
 	public static final Logger LOGGER = LoggerFactory.getLogger(MOD_ID);
 
 	private static NNRConfig config;
+	private static TeleportLog teleportLog;
 
 	@Override
 	public void onInitialize() {
 		config = NNRConfig.load();
+		config.save(); // writes options added by newer versions into existing files
+		if (config.logTeleports) {
+			teleportLog = new TeleportLog(config.maxLogLines);
+		}
 
 		ServerTickEvents.END_LEVEL_TICK.register(NNRMod::onLevelTick);
 	}
@@ -77,7 +83,14 @@ public class NNRMod implements ModInitializer {
 			}
 		}
 
+		String from = String.format(Locale.ROOT, "%.1f %.1f %.1f", player.getX(), player.getY(), player.getZ());
 		player.teleport(transition);
+		if (teleportLog != null) {
+			var to = transition.position();
+			teleportLog.add(String.format(Locale.ROOT, "%s | Nether %s -> %s %.1f %.1f %.1f",
+					player.getName().getString(), from, transition.newLevel().dimension().identifier(),
+					to.x, to.y, to.z));
+		}
 		// Plain literal, not translatable() - this is a server-only mod, so joining
 		// clients never have the mod's lang file and would just see the raw key.
 		player.sendSystemMessage(Component.literal("Usage of the Nether Roof is not allowed on this server.")

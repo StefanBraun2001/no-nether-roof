@@ -5,7 +5,7 @@ Server-side Fabric mod. Detects players standing on top of the Nether
 bed/respawn-anchor spawn point - or the world spawn if they don't have
 one - with a warning message.
 
-Current build: **A0.1.0** (alpha), MC **26.3**. Grab a built jar from
+Current build: **A0.2.0** (alpha), MC **26.3**. Grab a built jar from
 the [Releases](../../releases) page, or build from source with
 `./gradlew build` inside `26.3/` (needs JDK 25). Older releases built for MC 26.2 are
 kept published for anyone still on that version.
@@ -44,6 +44,12 @@ Config file: `config/nnr.json` (created on first run).
 - **whitelistedPlayers** (default: empty) - list of exact player names
   (case-insensitive) who are always exempt, regardless of the settings
   above, e.g. `["Stefan", "SomeFriend"]`.
+
+- **logTeleports** (default: `true`) - write every roof teleport to
+  `config/nnr_teleports.txt`, one line each, e.g.
+  `25.10.2026 14:03:12 | Stefan | Nether 12.3 131.0 -45.6 -> minecraft:overworld 100.5 64.0 20.5`
+  (server-local time; survives restarts).
+- **maxLogLines** (default: `1000`) - the oldest lines are dropped first.
 
 Editing the file requires a server restart (or reload, if one is added
 later) to take effect - there's no in-game config screen, since this mod

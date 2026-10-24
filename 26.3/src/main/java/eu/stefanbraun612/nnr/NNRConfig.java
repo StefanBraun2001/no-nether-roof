@@ -20,6 +20,8 @@ public class NNRConfig {
 	public boolean ignoreCreativePlayers = true;
 	public boolean ignoreOps = true;
 	public List<String> whitelistedPlayers = new ArrayList<>();
+	public boolean logTeleports = true;
+	public int maxLogLines = 1000;
 
 	public static NNRConfig load() {
 		if (Files.exists(PATH)) {
